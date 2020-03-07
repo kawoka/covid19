@@ -11,11 +11,7 @@
         <time class="WhatsNew-item-time px-2">{{ item.date }}</time>
         <span class="WhatsNew-item-link">
           {{ item.text }}
-          <v-icon
-            v-if="!isInternalLink(item.url)"
-            class="WhatsNew-item-ExternalLinkIcon"
-            size="12"
-          >
+          <v-icon v-if="!isInternalLink(item.url)" class="WhatsNew-item-ExternalLinkIcon" size="12" >
             mdi-open-in-new
           </v-icon>
         </span>
