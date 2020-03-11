@@ -186,10 +186,12 @@ export default {
                 cases = data[tooltipItem.datasetIndex][tooltipItem.index]
               } else {
                 casesTotal = cumulativeSumArray[tooltipItem.index]
-                cases = cumulativeData[tooltipItem.datasetIndex][tooltipItem.index]
+                cases =
+                  cumulativeData[tooltipItem.datasetIndex][tooltipItem.index]
               }
 
-              return `${casesTotal} ${unit} (${labelArray[tooltipItem.datasetIndex]}: ${cases})`
+              const label = labelArray[tooltipItem.datasetIndex]
+              return `${casesTotal} ${unit} (${label}: ${cases})`
             },
             title(tooltipItem, data) {
               return data.labels[tooltipItem[0].index]

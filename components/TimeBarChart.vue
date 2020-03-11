@@ -125,9 +125,12 @@ export default {
       if (this.dataKind === 'transition') {
         return {
           lText: `${this.chartData.slice(-1)[0].transition.toLocaleString()}`,
-          sText: `${this.$t('実績値')}（${this.$t('前日比')}: ${
-            this.displayTransitionRatio
-          } ${this.unit}）`,
+          sText: this.makeSText({
+            title: this.$t('実績値'),
+            ratioTitle: this.$t('前日比'),
+            ratio: this.displayTransitionRatio,
+            unit: this.unit
+          }),
           unit: this.unit
         }
       }
@@ -135,11 +138,12 @@ export default {
         lText: this.chartData[
           this.chartData.length - 1
         ].cumulative.toLocaleString(),
-        sText: `${this.chartData.slice(-1)[0].label} ${this.$t(
-          '累計値'
-        )}（${this.$t('前日比')}: ${this.displayCumulativeRatio} ${
-          this.unit
-        }）`,
+        sText: this.makeSText({
+          title: `${this.chartData.slice(-1)[0].label} ${this.$t('累計値')}`,
+          ratioTitle: this.$t('前日比'),
+          ratio: this.displayCumulativeRatio,
+          unit: this.unit
+        }),
         unit: this.unit
       }
     },
@@ -185,9 +189,8 @@ export default {
           displayColors: false,
           callbacks: {
             label(tooltipItem) {
-              const labelText =
-                `${parseInt(tooltipItem.value).toLocaleString()} ${unit}`
-              return labelText
+              const valueStr = parseInt(tooltipItem.value).toLocaleString()
+              return `${valueStr} ${unit}`
             },
             title(tooltipItem, data) {
               return data.labels[tooltipItem[0].index]
@@ -288,6 +291,9 @@ export default {
     }
   },
   methods: {
+    makeSText({ title, ratioTitle, ratio, unit }) {
+      return `${title}（${ratioTitle}: ${ratio} ${unit}）`
+    },
     formatDayBeforeRatio(dayBeforeRatio) {
       const dayBeforeRatioLocaleString = dayBeforeRatio.toLocaleString()
       switch (Math.sign(dayBeforeRatio)) {
