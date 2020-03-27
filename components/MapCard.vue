@@ -171,19 +171,35 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-.v-slider__tick-label {
-  transform: rorate(90deg);
-}
-.MapCard-BodyContainer {
-  position: relative;
-  &-LoadingScreen {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0.75);
-    top: 0;
-    left: 0;
+<style lang="scss">
+
+.MapCard {
+  .MapCard-BodyContainer {
+    position: relative;
+    &-LoadingScreen {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.75);
+      top: 0;
+      left: 0;
+    }
+  }
+  //XXX: override v-slider style
+  // stylelint-disable-next-line no-descending-specificity
+  .v-slider--horizontal .v-slider__tick:last-child .v-slider__tick-label {
+    @include font-size(11);
+
+    transform: translateX(-50%) translateY(30%) rotate(320deg);
+    color: $gray-3;
+  }
+  //XXX: override v-slider style
+  // stylelint-disable-next-line no-descending-specificity
+  .v-slider--horizontal .v-slider__tick .v-slider__tick-label {
+    @include font-size(11);
+
+    transform: translateX(-50%) translateY(30%) rotate(320deg);
+    color: $gray-3;
   }
 }
 </style>
